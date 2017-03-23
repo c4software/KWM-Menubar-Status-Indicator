@@ -11,6 +11,6 @@ Simple Python script to display a menubar status indicator.
 ## Build from source
 
 ```
-$ pip install pyobjc
+$ pip install pyobjc py2app
 $ ./package_app.sh
 ```
