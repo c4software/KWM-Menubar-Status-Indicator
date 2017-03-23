@@ -6,6 +6,8 @@ from Foundation import *
 from AppKit import *
 from PyObjCTools import AppHelper
 
+__VERSION__ = "0.1"
+
 class MyApplicationAppDelegate(NSObject):
     def applicationDidFinishLaunching_(self, sender):
         self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength_(NSVariableStatusItemLength)
