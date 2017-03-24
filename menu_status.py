@@ -9,9 +9,11 @@ from PyObjCTools import AppHelper
 __VERSION__ = "0.1"
 
 class MyApplicationAppDelegate(NSObject):
+    mode = "init"
+    mode_to_status = {"bsp": "B", "monocle": "M", "float": "F", "error": "E"}
     def applicationDidFinishLaunching_(self, sender):
         self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength_(NSVariableStatusItemLength)
-        self.statusItem.setTitle_("init")
+        self.to_display()
         self.statusItem.setHighlightMode_(FALSE)
         self.statusItem.setEnabled_(TRUE)
 
@@ -43,10 +45,19 @@ class MyApplicationAppDelegate(NSObject):
     def get_mode(self):
         try:
             command = "kwmc query space active mode".split(" ")
-            mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip().translate(None, "[]")
-            self.statusItem.setTitle_(mode)
+            self.mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip().translate(None, "[]")
         except:
-            print ("Erreur")
+            self.mode = "error"
+            
+        self.to_display()
+
+    def to_display(self):
+        # bsp | monocle | float | other
+        self.statusItem.setToolTip_(self.mode)
+        if self.mode in self.mode_to_status:
+            self.statusItem.setTitle_("B")
+        else:
+            self.statusItem.setTitle_(self.mode)
 
 def hide_dock_icon():
     NSApplicationActivationPolicyRegular = 0
