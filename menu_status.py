@@ -6,7 +6,7 @@ from Foundation import *
 from AppKit import *
 from PyObjCTools import AppHelper
 
-__VERSION__ = "0.1"
+__VERSION__ = "0.2"
 
 class MyApplicationAppDelegate(NSObject):
     mode = "init"
@@ -48,7 +48,7 @@ class MyApplicationAppDelegate(NSObject):
             self.mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip().translate(None, "[]")
         except:
             self.mode = "error"
-            
+
         self.to_display()
 
     def to_display(self):
