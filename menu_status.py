@@ -43,7 +43,7 @@ class MyApplicationAppDelegate(NSObject):
     def get_mode(self):
         try:
             command = "kwmc query space active mode".split(" ")
-            mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip()
+            mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip().translate(None, "[]")
             self.statusItem.setTitle_(mode)
         except:
             print ("Erreur")
