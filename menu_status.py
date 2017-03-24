@@ -11,7 +11,7 @@ __VERSION__ = "0.1"
 class MyApplicationAppDelegate(NSObject):
     def applicationDidFinishLaunching_(self, sender):
         self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength_(NSVariableStatusItemLength)
-        self.statusItem.setTitle_("[init]")
+        self.statusItem.setTitle_("init")
         self.statusItem.setHighlightMode_(FALSE)
         self.statusItem.setEnabled_(TRUE)
 
