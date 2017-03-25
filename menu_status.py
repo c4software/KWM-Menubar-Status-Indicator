@@ -72,7 +72,7 @@ class KwmStatusMenuAppDelegate(NSObject):
         # bsp | monocle | float | other
         self.statusItem.setToolTip_(self.mode)
         if self.mode in self.mode_to_status:
-            self.statusItem.setTitle_("B")
+            self.statusItem.setTitle_(self.mode_to_status[self.mode])
         else:
             self.statusItem.setTitle_(self.mode)
 
