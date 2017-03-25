@@ -8,9 +8,10 @@ from PyObjCTools import AppHelper
 
 __VERSION__ = "0.2"
 
-class MyApplicationAppDelegate(NSObject):
+class KwmStatusMenuAppDelegate(NSObject):
     mode = "init"
     mode_to_status = {"bsp": "B", "monocle": "M", "float": "F", "error": "E"}
+    mode_list = ["Bsp", "Monocle", "Float"]
     def applicationDidFinishLaunching_(self, sender):
         self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength_(NSVariableStatusItemLength)
         self.to_display()
@@ -25,8 +26,17 @@ class MyApplicationAppDelegate(NSObject):
 
         # menu
         self.menu = NSMenu.alloc().init()
+
+        # Action
+        for mode in self.mode_list:
+            menuitem = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(mode, 'clickEvent:', '')
+            self.menu.addItem_(menuitem)
+
+        # Separator and Quit action
+        self.menu.addItem_(NSMenuItem.separatorItem())
         menuitem = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_('Quit', 'terminate:', '')
         self.menu.addItem_(menuitem)
+
         self.statusItem.setMenu_(self.menu)
 
         # Timer de refresh
@@ -35,6 +45,11 @@ class MyApplicationAppDelegate(NSObject):
         # self.timer.fire()
 
         self.get_mode()
+
+    def clickEvent_(self, notification):
+        mode = notification.title()
+        if mode in self.mode_list:
+            command = "kwmc space -t {0}".format(mode)
 
     def observerEvent_(self, notifications):
         self.get_mode()
@@ -66,7 +81,7 @@ def hide_dock_icon():
     NSApp.setActivationPolicy_(NSApplicationActivationPolicyProhibited)
 
 app = NSApplication.sharedApplication()
-delegate = MyApplicationAppDelegate.alloc().init()
+delegate = KwmStatusMenuAppDelegate.alloc().init()
 app.setDelegate_(delegate)
 hide_dock_icon()
 AppHelper.runEventLoop()
