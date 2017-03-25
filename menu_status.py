@@ -49,7 +49,10 @@ class KwmStatusMenuAppDelegate(NSObject):
     def clickEvent_(self, notification):
         mode = notification.title()
         if mode in self.mode_list:
-            command = "kwmc space -t {0}".format(mode)
+            command = "kwmc space -t {0}".format(mode.lower())
+            subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()
+
+        self.get_mode()
 
     def observerEvent_(self, notifications):
         self.get_mode()
