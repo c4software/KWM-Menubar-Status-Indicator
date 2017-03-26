@@ -50,7 +50,7 @@ class KwmStatusMenuAppDelegate(NSObject):
         mode = notification.title()
         if mode in self.mode_list:
             command = "kwmc space -t {0}".format(mode.lower())
-            subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()
+            run_command(command)
         self.get_mode()
 
     def observerEvent_(self, notifications):
@@ -61,8 +61,8 @@ class KwmStatusMenuAppDelegate(NSObject):
 
     def get_mode(self):
         try:
-            command = "kwmc query space active mode".split(" ")
-            self.mode = subprocess.Popen(command, stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()[0].rstrip().translate(None, "[]")
+            command = "kwmc query space active mode"
+            self.mode = run_command(command)[0].rstrip().translate(None, "[]")
         except:
             self.mode = "error"
 
@@ -75,6 +75,9 @@ class KwmStatusMenuAppDelegate(NSObject):
             self.statusItem.setTitle_(self.mode_to_status[self.mode])
         else:
             self.statusItem.setTitle_(self.mode)
+
+def run_command(command):
+    return subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()
 
 def hide_dock_icon():
     NSApplicationActivationPolicyRegular = 0
