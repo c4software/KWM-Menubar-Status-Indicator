@@ -77,7 +77,10 @@ class KwmStatusMenuAppDelegate(NSObject):
             self.statusItem.setTitle_(self.mode)
 
 def run_command(command):
-    return subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()
+    if command.startswith("kwmc")
+        return subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, env={'PATH': '/usr/local/bin'}).communicate()
+    else:
+        return ("", "")
 
 def hide_dock_icon():
     NSApplicationActivationPolicyRegular = 0
