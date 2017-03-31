@@ -6,7 +6,7 @@ Simple Python script to display a menubar status indicator.
 
 ## Download
 
-[Download](dist/menu_status.zip?raw=true)
+[Download](dist/kwm-status-menu.zip?raw=true)
 
 ## Build from source
 
