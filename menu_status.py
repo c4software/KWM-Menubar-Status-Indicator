@@ -6,7 +6,7 @@ from Foundation import *
 from AppKit import *
 from PyObjCTools import AppHelper
 
-__VERSION__ = "0.4"
+__VERSION__ = "0.5"
 
 class KwmStatusMenuAppDelegate(NSObject):
     mode = "init"
@@ -69,12 +69,23 @@ class KwmStatusMenuAppDelegate(NSObject):
         self.to_display()
 
     def to_display(self):
-        # bsp | monocle | float | other
-        self.statusItem.setToolTip_(self.mode)
+        self.statusItem.setHighlightMode_(1)
+
+        # Fallback to monocle if not known
         if self.mode in self.mode_to_status:
-            self.statusItem.setTitle_(self.mode_to_status[self.mode])
+            mode = self.mode
         else:
-            self.statusItem.setTitle_(self.mode)
+            mode = "monocle"
+
+        # Set Icon
+        try:
+            icon = NSImage.alloc().initByReferencingFile_('icons/{0}.png'.format(mode))
+            icon.setScalesWhenResized_(True)
+            icon.setSize_((20, 20))
+            self.statusItem.setImage_(icon)
+            self.statusItem.setToolTip_(self.mode_to_status[mode])
+        except Exception as e:
+            pass
 
 def run_command(command):
     if command.startswith("kwmc"):
