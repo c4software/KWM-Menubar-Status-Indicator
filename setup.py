@@ -3,7 +3,7 @@ from setuptools import setup
 APP_NAME = "kwm-status-menu"
 APP_VERSION = "0.5.0"
 APP = ['menu_status.py']
-DATA_FILES = ["icons/bsp.png", "icons/float.png", "icons/monocle.png"]
+DATA_FILES = [("icons", ["icons/"])]
 OPTIONS = {
     'argv_emulation': True,
     'plist': {
