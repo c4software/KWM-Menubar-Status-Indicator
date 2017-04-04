@@ -1,8 +1,9 @@
 from setuptools import setup
 
 APP_NAME = "kwm-status-menu"
+APP_VERSION = "0.5.0"
 APP = ['menu_status.py']
-DATA_FILES = []
+DATA_FILES = ["icons/bsp.png", "icons/float.png", "icons/monocle.png"]
 OPTIONS = {
     'argv_emulation': True,
     'plist': {
@@ -11,8 +12,8 @@ OPTIONS = {
         'CFBundleDisplayName': APP_NAME,
         'CFBundleGetInfoString': "KWM Status Menu",
         'CFBundleIdentifier': "com.vbrosseau.kwm-status-menu",
-        'CFBundleVersion': "0.4.0",
-        'CFBundleShortVersionString': "0.4.0",
+        'CFBundleVersion': APP_VERSION,
+        'CFBundleShortVersionString': APP_VERSION,
         'NSHumanReadableCopyright': u"Valentin Brosseau"
     },
     'iconfile': 'app.icns',
