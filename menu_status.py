@@ -6,7 +6,7 @@ from Foundation import *
 from AppKit import *
 from PyObjCTools import AppHelper
 
-__VERSION__ = "0.5"
+__VERSION__ = "0.6"
 
 class KwmStatusMenuAppDelegate(NSObject):
     mode = "init"

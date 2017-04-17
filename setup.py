@@ -1,7 +1,7 @@
 from setuptools import setup
 
 APP_NAME = "kwm-status-menu"
-APP_VERSION = "0.5.0"
+APP_VERSION = "0.6.0"
 APP = ['menu_status.py']
 DATA_FILES = [("icons", ["icons/"])]
 OPTIONS = {
