@@ -10,7 +10,7 @@ __VERSION__ = "0.5"
 
 class KwmStatusMenuAppDelegate(NSObject):
     mode = "init"
-    mode_to_status = {"bsp": "B", "monocle": "M", "float": "F", "error": "E"}
+    mode_to_status = {"bsp": "Bsp", "monocle": "Monocle", "float": "Float", "error": "Unknown"}
     mode_list = ["Bsp", "Monocle", "Float"]
     def applicationDidFinishLaunching_(self, sender):
         self.statusItem = NSStatusBar.systemStatusBar().statusItemWithLength_(NSVariableStatusItemLength)
